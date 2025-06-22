@@ -11,43 +11,61 @@ import PageLoader from "./components/PageLoader.jsx";
 import useAuthUser from "./hooks/useAuthUser.js";
 
 function App() {
-  // tanstack query
+  const { isLoading, authUser } = useAuthUser();
 
-  const { isLoading, authUser} = useAuthUser ();
-  
+  const isAuthenticated = Boolean(authUser);
+  const isOnboarded = authUser?.isOnboarded;
 
-  if (isLoading) return < PageLoader />;
+  if (isLoading) return <PageLoader />;
 
   return (
     <div className="h-screen" data-theme="night">
       <Routes>
         <Route
           path="/"
-          element={authUser ? <HomePage /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated && isOnboarded ? (
+              <HomePage />
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/login"
-          element={!authUser ? <Login /> : <Navigate to="/" />}
+          element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
         />
         <Route
           path="/signup"
-          element={!authUser ? <SignUp /> : <Navigate to="/" />}
+          element={!isAuthenticated ? <SignUp /> : <Navigate to="/" />}
         />
         <Route
           path="/onboarding"
-          element={authUser ? <Onboarding /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated ? (
+              !isOnboarded ? (
+                <Onboarding />
+              ) : (
+                <Navigate to="/" />
+              )
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
         <Route
           path="/notification"
-          element={authUser ? <Notification /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated ? <Notification /> : <Navigate to="/login" />
+          }
         />
         <Route
           path="/call"
-          element={authUser ? <Call /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Call /> : <Navigate to="/login" />}
         />
         <Route
           path="/chat"
-          element={authUser ? <Chat /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <Chat /> : <Navigate to="/login" />}
         />
       </Routes>
 
