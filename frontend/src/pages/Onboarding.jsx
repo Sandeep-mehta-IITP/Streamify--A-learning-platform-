@@ -31,9 +31,8 @@ const Onboarding = () => {
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message)
-      
-    }
+      toast.error(error.response?.data?.message);
+    },
   });
 
   const onboardingSubmitHandler = (e) => {
@@ -45,7 +44,7 @@ const Onboarding = () => {
     const idx = Math.floor(Math.random() * 100) + 1; // 1 - 100 included
     const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
 
-    setFormState({...formState, profilePic: randomAvatar});
+    setFormState({ ...formState, profilePic: randomAvatar });
     toast.success("Random profile pic generated");
   };
 
@@ -140,9 +139,11 @@ const Onboarding = () => {
                 >
                   <option value="">Select your native language</option>
                   {LANGUAGES.map((lang) => {
-                    <option key={`native-${lang}`} value={lang.toLowerCase()}>
-                      {lang}
-                    </option>;
+                    return (
+                      <option key={`native-${lang}`} value={lang.toLowerCase()}>
+                        {lang}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
@@ -165,9 +166,14 @@ const Onboarding = () => {
                 >
                   <option value="">Select your learning language</option>
                   {LANGUAGES.map((lang) => {
-                    <option key={`learning-${lang}`} value={lang.toLowerCase()}>
-                      {lang}
-                    </option>;
+                    return (
+                      <option
+                        key={`learning-${lang}`}
+                        value={lang.toLowerCase()}
+                      >
+                        {lang}
+                      </option>
+                    );
                   })}
                 </select>
               </div>

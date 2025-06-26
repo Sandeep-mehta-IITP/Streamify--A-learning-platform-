@@ -19,7 +19,7 @@ import CallButton from "../components/CallButton";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
-const Chat = () => {
+const ChatPage = () => {
   const { id: targetUserId } = useParams();
 
   const [chatClient, setChatClient] = useState(null);
@@ -104,4 +104,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatPage;

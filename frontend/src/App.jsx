@@ -5,7 +5,7 @@ import SignUp from "./pages/SignUp.jsx";
 import Onboarding from "./pages/Onboarding.jsx";
 import Notification from "./pages/Notification.jsx";
 import Call from "./pages/Call.jsx";
-import Chat from "./pages/Chat.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
 import { Toaster } from "react-hot-toast";
 import PageLoader from "./components/PageLoader.jsx";
 import useAuthUser from "./hooks/useAuthUser.js";
@@ -97,7 +97,7 @@ function App() {
           element={
             isAuthenticated && isOnboarded ? (
               <Layout showSideBar={false}>
-                <Chat />
+                <ChatPage />
               </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
